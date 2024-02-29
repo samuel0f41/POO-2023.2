@@ -1,4 +1,4 @@
-package br.samuel.mercado;
+package sam.mercado;
 
 public interface SistemaMercadoInteface {
     void cadastrarProduto(String nome, String categoria, double preco) throws ProdutoNaoExisteException;

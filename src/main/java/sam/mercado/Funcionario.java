@@ -1,4 +1,4 @@
-package br.samuel.mercado;
+package sam.mercado;
 
 public class Funcionario {
     private String nomeFuncionario;

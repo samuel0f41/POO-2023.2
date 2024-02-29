@@ -1,4 +1,4 @@
-package br.samuel.mercado;
+package sam.mercado;
 
 public class ProdutoNaoExisteException extends Exception {
     public ProdutoNaoExisteException(String msg){

@@ -1,4 +1,4 @@
-package br.samuel.mercado;
+package sam.mercado;
 
 import java.util.Scanner;
 
