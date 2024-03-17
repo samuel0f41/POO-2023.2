@@ -17,9 +17,6 @@ public class Jogador implements Serializable {
         this.nomeTime = nomeTime;
         this.cpf = cpf;
     }
-    public Jogador(){
-        this.numero = "";
-    }
 
     public boolean temTime() {
         return !nomeTime.isEmpty();
@@ -66,7 +63,7 @@ public class Jogador implements Serializable {
     }
 
     public String toString(){
-        return "Jogador: "+ this.nome + " Idade: " + this.idade+ "Time: "+ this.getNomeTime();
+        return "Jogador: "+ this.nome + "- Idade: " + this.idade+ " Numero "+this.numero + "CPF: " + this.cpf +"\n";
     }
 
     @Override
@@ -78,6 +75,7 @@ public class Jogador implements Serializable {
 
         return Objects.equals(cpf, jogador.cpf);
     }
+
     @Override
     public int hashCode() {
         return cpf != null ? cpf.hashCode() : 0;
