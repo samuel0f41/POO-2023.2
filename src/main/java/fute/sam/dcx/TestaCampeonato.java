@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TestaCampeonato {
     public static void main(String [] args) throws NaoExisteJogadorException, TimeNaoExisteException, NumeroDeCamisaJaExisteException, TimeNaoRemovidoException, JaExisteJogadorExecption, JaExisteNumeroCamisaExecption {
-        SistemaClube campeonato = new CampeonatoBrasileiro();
+        SistemaCampeonato campeonato = new CampeonatoBrasileiro();
 
         String x = JOptionPane.showInputDialog("Menu \n1- Cadastrar \n2- Remover \n3- Pequisar jogadores do Time " +
                 "\n4- Alterar numero do jogador\n5- Lista de jogadores e time\n6- sair" );

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CampeonatoBrasileiro implements SistemaClube {
+public class CampeonatoBrasileiro implements SistemaCampeonato {
     private Map<String, Time> listaTimes;
     private Map<String, Jogador> listaJogadores;
     GravadorDeTime gravadorTimes = new GravadorDeTime();
