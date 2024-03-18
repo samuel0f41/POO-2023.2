@@ -32,7 +32,7 @@ public class Time implements Serializable {
 
     @Override
     public String toString() {
-        return this.nome ;
+        return this.nome + "\n" ;
     }
 
     @Override
