@@ -1,10 +1,7 @@
 package fute.sam.dcx;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CampeonatoBrasileiro implements SistemaCampeonato {
     private Map<String, Time> listaTimes;
@@ -75,12 +72,12 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
     }
 
     @Override
-    public List<Jogador> pesquisarJogadoresDoTime(String nomeTime) throws TimeNaoExisteException{
+    public Collection<Jogador> pesquisarJogadoresDoTime(String nomeTime) throws TimeNaoExisteException{
 
         if (listaTimes.containsKey(nomeTime)) {
             throw new TimeNaoExisteException("Esse time não existe, pesquise por outro");
         }
-        List<Jogador> jogadoresDoTime = new ArrayList<>();
+        Collection<Jogador> jogadoresDoTime = new ArrayList<>();
         for(Jogador j: listaJogadores.values()){
             if(j.getNomeTime().equals(nomeTime)){
                 jogadoresDoTime.add(j);
@@ -117,16 +114,8 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
         return "Times = " + listaTimes +
                 "\nJogadores do campeonato =" + listaJogadores;
     }
-
-    public void setListaTimes(Map<String, Time> listaTimes) {
-        this.listaTimes = listaTimes;
-    }
-
     public Map<String, Jogador> getListaJogadores() {
         return listaJogadores;
     }
 
-    public void setListaJogadores(Map<String, Jogador> listaJogadores) {
-        this.listaJogadores = listaJogadores;
-    }
 }//FIM DA CLASS

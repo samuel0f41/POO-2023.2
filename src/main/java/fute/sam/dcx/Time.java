@@ -1,8 +1,6 @@
 package fute.sam.dcx;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Time implements Serializable {
@@ -32,7 +30,7 @@ public class Time implements Serializable {
 
     @Override
     public String toString() {
-        return this.nome + "\n" ;
+        return this.nome + " - CNPJ: " + this.PJ + "\n" ;
     }
 
     @Override

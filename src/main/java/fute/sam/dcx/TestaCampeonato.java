@@ -2,6 +2,7 @@ package fute.sam.dcx;
 
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class TestaCampeonato {
@@ -43,7 +44,7 @@ public class TestaCampeonato {
 
             }else if(x.equals("3")){
                 String nomeTime = JOptionPane.showInputDialog(null, "Nome do Time: ");
-                List<Jogador> jogadoresTime = campeonato.pesquisarJogadoresDoTime(nomeTime);
+                Collection<Jogador> jogadoresTime = campeonato.pesquisarJogadoresDoTime(nomeTime);
                 JOptionPane.showMessageDialog(null, jogadoresTime );
 
             }else if(x.equals("4")){
