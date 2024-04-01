@@ -9,7 +9,7 @@ public class CampeonatoGui extends JFrame {
     JMenuBar barraMenu = new JMenuBar();
     public CampeonatoGui(){
 
-        setTitle("Gerenciador do campionato Brasileiro 2024");
+        setTitle("Gerenciador do campeonato Brasileiro 2024");
         setSize(950, 650);
         setLocation(300,110);
         setResizable(false);
