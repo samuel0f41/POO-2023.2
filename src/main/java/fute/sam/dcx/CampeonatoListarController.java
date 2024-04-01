@@ -16,12 +16,13 @@ public class CampeonatoListarController implements ActionListener {
 
         String opcao = "0";
         while(!opcao.equals("3")){
-            opcao =JOptionPane.showInputDialog("Escolha (1/2 ou 3 para voltar ao menu)\n 1- Listar jogadores\n 2- Listar Times");
+            opcao =JOptionPane.showInputDialog("Escolha (1/2)\n 1- Listar Times\n 2- Listar jogadores");
             if(opcao.equals("1")){
-                JOptionPane.showMessageDialog(janelaPrincial,campeonato.getListaJogadores());
-            }else if(opcao.equals("2")){
                 JOptionPane.showMessageDialog(janelaPrincial,campeonato.getListaTimes());
+            }else if(opcao.equals("2")){
+                JOptionPane.showMessageDialog(janelaPrincial,campeonato.getListaJogadores());
             }
+            opcao = "3";
         }
 
 

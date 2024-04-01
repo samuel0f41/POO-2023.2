@@ -10,18 +10,18 @@ public class CampeonatoGui extends JFrame {
     public CampeonatoGui(){
 
         setTitle("Gerenciador do campionato Brasileiro 2024");
-        setSize(900, 600);
-        setLocation(300,130);
+        setSize(950, 650);
+        setLocation(300,110);
         setResizable(false);
         setBackground(Color.white);
 
-        brasileirao = new ImageIcon("./imgs/bra1.png");
+        brasileirao = new ImageIcon("./imgs/bra2.png");
 
         Image imagemOriginal = brasileirao.getImage();
         Image imagemRedimensionada = imagemOriginal.getScaledInstance(875, 455, Image.SCALE_SMOOTH);
         brasileirao = new ImageIcon(imagemRedimensionada);
 
-        linha1 = new JLabel("Brasileirão Serie A", JLabel.CENTER);
+        linha1 = new JLabel("Campeonato Brasileiro 2024", JLabel.CENTER);
         linha1.setForeground(Color.blue);
         linha1.setFont(new Font("Serif", Font.BOLD, 40));
         add(linha1, BorderLayout.NORTH);
@@ -42,11 +42,11 @@ public class CampeonatoGui extends JFrame {
         menuCadastrar.add(menuCadastrarTimeEJogadores);
 
         JMenu menuPesquisar = new JMenu("Pesquisar");
-        JMenuItem menuPesquisarJogador = new JMenuItem("Jogador");
+        JMenuItem menuPesquisarJogador = new JMenuItem("Jogadores do Time");
         menuPesquisar.add(menuPesquisarJogador);
 
         JMenu menuRemover = new JMenu("Remover");
-        JMenuItem menuRemoverJogador = new JMenuItem("Jogador do Time");
+        JMenuItem menuRemoverJogador = new JMenuItem("Time ou Jogador");
         menuRemover.add(menuRemoverJogador);
 
         JMenu menuAlteraNumero = new JMenu("Alterar");
@@ -57,7 +57,7 @@ public class CampeonatoGui extends JFrame {
         JMenuItem menuListarTimeOUjogador = new JMenuItem("Time ou jogador");
         menuListar.add(menuListarTimeOUjogador);
 
-        JMenu menuSalvar = new JMenu("salvar");
+        JMenu menuSalvar = new JMenu("Salvar");
         JMenuItem menuSalvarDados = new JMenuItem("Dados atuais");
         menuSalvar.add(menuSalvarDados);
 
@@ -67,7 +67,7 @@ public class CampeonatoGui extends JFrame {
         menuAlteraNumeroJogador.addActionListener(new CampeonatoAlteraNumController(campeonato, this));
         menuListarTimeOUjogador.addActionListener(new CampeonatoListarController(campeonato, this));
         menuSalvarDados.addActionListener((ae) -> {
-            campeonato.sairDoSistema();
+            campeonato.salvarDados();
         });
 
         barraMenu.add(menuCadastrar);

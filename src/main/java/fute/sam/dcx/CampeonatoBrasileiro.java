@@ -20,7 +20,7 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
         }
     }
 
-    public void sairDoSistema(){
+    public void salvarDados(){
         try {
             this.gravadorTimes.gravaTimes(this.listaTimes);
             this.gravadorJogadores.gravaJogadores(this.listaJogadores);
@@ -30,14 +30,35 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
     }
 
     @Override
-    public String cadatrarJogador(Jogador jogador) throws JaExisteJogadorExecption, JaExisteNumeroCamisaExecption {
-        if(!listaJogadores.containsKey(jogador.getCpf())  && !listaJogadores.containsKey(jogador.getNumero()) ){
-            listaJogadores.put(jogador.getNome(), jogador);
-            return "Jogador cadastrado com sucesso: " + jogador;
-        }else if(listaJogadores.containsKey(jogador.getNumero())){
-            throw new JaExisteNumeroCamisaExecption("Ja possui um jogador com esse numero de camisa!");
+    public String cadatrarJogador(Jogador jogador) throws JaExisteJogadorExecption, JaExisteNumeroCamisaExecption, TimeNaoExisteException {
+        if(listaJogadores.containsKey(jogador.getCpf())){
+            throw new JaExisteJogadorExecption("Não foi possível cadastrar. Jogador já existe.");
         }
-        throw new JaExisteJogadorExecption("Não foi possível cadastrar. Jogador já existe.");
+
+        boolean timeAchou = false;
+        for(Time t:listaTimes.values()){
+            if(t.getNome().startsWith(jogador.getNomeTime())){
+               timeAchou = true;
+            }
+        }
+        if(!timeAchou){
+            throw new TimeNaoExisteException("Não existe time com esse nome");
+        }
+
+
+        boolean numeroCamisaRepetido = false;
+        for(Jogador j: listaJogadores.values()){
+            if(j.getNumero().equals(jogador.getNumero())){
+                numeroCamisaRepetido = true;
+            }
+        }
+        if(numeroCamisaRepetido){
+            throw new JaExisteNumeroCamisaExecption("Ja possui um jogador com a camisa: "+ jogador.getNumero()+ " Tente outro numero");
+        }
+        listaJogadores.put(jogador.getCpf(), jogador);
+        return "Jogador: "+jogador+ " cadastrado!";
+
+
     }
 
     public String revomerJogador(String cpf) throws NaoExisteJogadorException{
@@ -63,7 +84,7 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
         }
 
         for(Jogador j: listaJogadores.values()){
-            if(!j.getCpf().equals(jogadorEncontrado.getCpf()) && j.getNomeTime().equals(nomeTime) && j.getNumero().equals(numeroCamisa)){
+            if(!j.getCpf().equals(jogadorEncontrado.getCpf()) && j.getNomeTime().startsWith(nomeTime) && j.getNumero().equals(numeroCamisa)){
                     throw new NumeroDeCamisaJaExisteException("Não foi possivel troca de numero, ja possui um c");
             }
         }
@@ -73,17 +94,17 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
 
     @Override
     public Collection<Jogador> pesquisarJogadoresDoTime(String nomeTime) throws TimeNaoExisteException{
-
-        if (listaTimes.containsKey(nomeTime)) {
-            throw new TimeNaoExisteException("Esse time não existe, pesquise por outro");
-        }
         Collection<Jogador> jogadoresDoTime = new ArrayList<>();
         for(Jogador j: listaJogadores.values()){
-            if(j.getNomeTime().equals(nomeTime)){
+            if(j.getNomeTime().startsWith(nomeTime)){
                 jogadoresDoTime.add(j);
             }
         }
-
+        for(Time t: listaTimes.values()){
+            if(!t.getNome().equals(nomeTime)){
+                throw new TimeNaoExisteException("Esse time não existe, pesquise por outro");
+            }
+        }
         return jogadoresDoTime;
     }
 
@@ -97,16 +118,21 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
     }
 
 
-    public void removerTime(Time time) throws TimeNaoRemovidoException{
+    public String removerTime(Time time) throws TimeNaoRemovidoException{
         if(listaTimes.containsKey(time.getPJ())){
             listaTimes.remove(time.getPJ());
         }else{
             throw new TimeNaoRemovidoException("TIME NÃO ENCONTRADO, TENTE OUTRO!");
         }
+        return "Time "+ time+ " Revomido!";
     }
 
-    public Map<String, Time> getListaTimes() {
-        return listaTimes;
+    public Collection<Time> getListaTimes() {
+        Collection<Time> times = new LinkedList<>();
+        for(Time t: listaTimes.values()){
+            times.add(t);
+        }
+        return times;
     }
 
     @Override
@@ -114,8 +140,12 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
         return "Times = " + listaTimes +
                 "\nJogadores do campeonato =" + listaJogadores;
     }
-    public Map<String, Jogador> getListaJogadores() {
-        return listaJogadores;
+    public  Collection<Jogador> getListaJogadores() {
+        Collection<Jogador> jogadores = new LinkedList<>();
+        for(Jogador j: listaJogadores.values()){
+            jogadores.add(j);
+        }
+        return jogadores;
     }
 
 }//FIM DA CLASS

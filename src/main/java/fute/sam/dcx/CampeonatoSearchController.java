@@ -18,11 +18,8 @@ public class CampeonatoSearchController implements ActionListener {
         String nomeTime = JOptionPane.showInputDialog(janelaPrincipal,
                 "Time: ");
         try {
-            Collection<Jogador> jogadores = campeonato.pesquisarJogadoresDoTime(nomeTime);
-            JOptionPane.showMessageDialog(janelaPrincipal, "Jogador encontrado: ");
-            for(Jogador j: jogadores){
-                JOptionPane.showMessageDialog(janelaPrincipal, j.toString());
-            }
+            JOptionPane.showMessageDialog(janelaPrincipal, "Jogadores do "+ nomeTime+ ": \n" +
+                    campeonato.pesquisarJogadoresDoTime(nomeTime));
         } catch (TimeNaoExisteException ex) {
             throw new RuntimeException(ex);
         }

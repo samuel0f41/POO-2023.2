@@ -55,14 +55,14 @@ public class TestaCampeonato {
             }else if(x.equals("5")){
                 String y = JOptionPane.showInputDialog("1- Listar todos os Times \n2- Listar todos jogadores");
                 if (y.equals("1")) {
-                    List<Time> times = new ArrayList<>(campeonato.getListaTimes().values());
+                    List<Time> times = new ArrayList<>(campeonato.getListaTimes());
                     JOptionPane.showMessageDialog(null, times);
                 } else if (y.equals("2")) {
-                    List<Jogador> jogadores = new ArrayList<>(campeonato.getListaJogadores().values());
+                    List<Jogador> jogadores = new ArrayList<>(campeonato.getListaJogadores());
                     JOptionPane.showMessageDialog(null, jogadores);
                 }
             }else if(x.equals("6")){
-                campeonato.sairDoSistema();
+                campeonato.salvarDados();
                 x = "7";
             }
             if(!x.equals("7")){

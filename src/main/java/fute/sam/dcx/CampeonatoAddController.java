@@ -15,7 +15,7 @@ public class CampeonatoAddController implements ActionListener {
     public void actionPerformed(ActionEvent e){
         String opcao = "0";
         while(!opcao.equals("3")){
-            opcao = JOptionPane.showInputDialog("Escola (1/2 ou 3 para voltar) " +
+            opcao = JOptionPane.showInputDialog("Escolha (1/2 ou 3 para voltar) " +
                     "\n1- Cadastrar um Time \n2- Cadastrar Jogador");
 
             if(opcao.equals("1")){
@@ -37,6 +37,8 @@ public class CampeonatoAddController implements ActionListener {
                 }catch (JaExisteJogadorExecption ex) {
                     throw new RuntimeException(ex);
                 } catch (JaExisteNumeroCamisaExecption ex) {
+                    throw new RuntimeException(ex);
+                } catch (TimeNaoExisteException ex) {
                     throw new RuntimeException(ex);
                 }
             }
