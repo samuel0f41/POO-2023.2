@@ -37,6 +37,7 @@ public class CampeonatoGui extends JFrame {
         add(linha1);
         add(linha2);
         add(new JLabel());
+
         JMenu menuCadastrar = new JMenu("Cadastrar");
         JMenuItem menuCadastrarTimeEJogadores = new JMenuItem("Time ou Jogador");
         menuCadastrar.add(menuCadastrarTimeEJogadores);
@@ -77,7 +78,6 @@ public class CampeonatoGui extends JFrame {
         barraMenu.add(menuListar);
         barraMenu.add(menuSalvar);
         setJMenuBar(barraMenu);
-
     }
 
     public static void main(String [] args){

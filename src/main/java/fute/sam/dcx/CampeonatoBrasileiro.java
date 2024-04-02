@@ -37,7 +37,7 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
 
         boolean timeAchou = false;
         for(Time t:listaTimes.values()){
-            if(t.getNome().startsWith(jogador.getNomeTime())){
+            if(t.getNome().equals(jogador.getNomeTime())){
                timeAchou = true;
             }
         }
@@ -48,7 +48,7 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
 
         boolean numeroCamisaRepetido = false;
         for(Jogador j: listaJogadores.values()){
-            if(j.getNumero().equals(jogador.getNumero())){
+            if(j.getNumero().equals(jogador.getNumero()) && j.getNomeTime().equals(jogador.getNomeTime())){
                 numeroCamisaRepetido = true;
             }
         }
@@ -56,7 +56,7 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
             throw new JaExisteNumeroCamisaExecption("Ja possui um jogador com a camisa: "+ jogador.getNumero()+ " Tente outro numero");
         }
         listaJogadores.put(jogador.getCpf(), jogador);
-        return "Jogador: "+jogador+ " cadastrado!";
+        return jogador+ " cadastrado!";
 
 
     }
@@ -71,7 +71,14 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
 
     @Override
     public String alteraNumeroJogador(String nomeTime, String cpf, String numeroCamisa) throws TimeNaoExisteException, NaoExisteJogadorException, NumeroDeCamisaJaExisteException {
-        if(listaTimes.containsKey(nomeTime)){
+        boolean achou = false;
+        for(Time t: listaTimes.values()){
+            if(t.getNome().equals(nomeTime)){
+                achou = true;
+                break;
+            }
+        }
+        if(!achou){
             throw new TimeNaoExisteException("Não existe esse time!");
         }
 
@@ -84,8 +91,8 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
         }
 
         for(Jogador j: listaJogadores.values()){
-            if(!j.getCpf().equals(jogadorEncontrado.getCpf()) && j.getNomeTime().startsWith(nomeTime) && j.getNumero().equals(numeroCamisa)){
-                    throw new NumeroDeCamisaJaExisteException("Não foi possivel troca de numero, ja possui um c");
+            if(!j.getCpf().equals(jogadorEncontrado.getCpf()) && j.getNomeTime().equals(nomeTime) && j.getNumero().equals(numeroCamisa)){
+                    throw new NumeroDeCamisaJaExisteException("Não foi possivel troca de numero, ja possui um jogador com essa camisa");
             }
         }
         jogadorEncontrado.setNumero(numeroCamisa);
@@ -95,17 +102,18 @@ public class CampeonatoBrasileiro implements SistemaCampeonato {
     @Override
     public Collection<Jogador> pesquisarJogadoresDoTime(String nomeTime) throws TimeNaoExisteException{
         Collection<Jogador> jogadoresDoTime = new ArrayList<>();
+        boolean achou = false;
         for(Jogador j: listaJogadores.values()){
-            if(j.getNomeTime().startsWith(nomeTime)){
+            if(j.getNomeTime().equals(nomeTime)){
                 jogadoresDoTime.add(j);
+                achou = true;
             }
         }
-        for(Time t: listaTimes.values()){
-            if(!t.getNome().equals(nomeTime)){
-                throw new TimeNaoExisteException("Esse time não existe, pesquise por outro");
-            }
+        if(!achou){
+            throw new TimeNaoExisteException("Esse time não existe, pesquise por outro");
+        }else{
+            return jogadoresDoTime;
         }
-        return jogadoresDoTime;
     }
 
     @Override

@@ -13,8 +13,8 @@ public class CampeonatoAlteraNumController implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        String nome = JOptionPane.showInputDialog("Nome do jogador: ");
-        String cpf = JOptionPane.showInputDialog("CPF: ");
+        String nome = JOptionPane.showInputDialog("Nome do Time do jogador: ");
+        String cpf = JOptionPane.showInputDialog("CPF do Jogador: ");
         String numero = JOptionPane.showInputDialog("Novo numero para jogador: ");
 
         try {
